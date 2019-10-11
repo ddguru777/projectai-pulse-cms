@@ -104,6 +104,7 @@ venv.bak/
 .mypy_cache/
 
 # static
+/static
 /static/admin/css/
 /static/admin/fonts/
 /static/admin/img/
