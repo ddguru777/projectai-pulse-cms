@@ -46,7 +46,7 @@ MOVE BACK
 
 dragula([
   document.getElementById('tile-container'),
-  document.getElementById('drop-panel')
+  document.getElementById('drop-area')
 ]);
 
 // var container = $("#clone-container");
