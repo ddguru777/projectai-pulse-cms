@@ -44,116 +44,121 @@ MOVE BACK
 ///////////////////////////////////////////////////////////////////////////////////
 */
 
-var container = $("#clone-container");
-var scrollBox = $("#scroll-box");
-var dropPanel = $("#drop-panel");
-var tiles     = $(".tile");
-var threshold = "50%";
+dragula([
+  document.getElementById('tile-container'),
+  document.getElementById('drop-panel')
+]);
 
-tiles.each(function() {
+// var container = $("#clone-container");
+// var scrollBox = $("#scroll-box");
+// var dropPanel = $("#drop-panel");
+// var tiles     = $(".tile");
+// var threshold = "50%";
 
-  var element = $(this);
-  var wrapper = element.parent();
-  var offset  = element.position();
+// tiles.each(function() {
 
-  var scope = {
-    clone   : element.clone().addClass("clone").prependTo(container),
-    element : element,
-    wrapper : wrapper,
-    width   : wrapper.outerWidth(),
-    dropped : false,
-    moved   : false,
-    get x() { return getPosition(wrapper, offset).x; },
-    get y() { return getPosition(wrapper, offset).y; }
-  };
+//   var element = $(this);
+//   var wrapper = element.parent();
+//   var offset  = element.position();
 
-  scope.draggable = createDraggable(scope);
+//   var scope = {
+//     clone   : element.clone().addClass("clone").prependTo(container),
+//     element : element,
+//     wrapper : wrapper,
+//     width   : wrapper.outerWidth(),
+//     dropped : false,
+//     moved   : false,
+//     get x() { return getPosition(wrapper, offset).x; },
+//     get y() { return getPosition(wrapper, offset).y; }
+//   };
 
-  element.on("mousedown touchstart", scope, startDraggable);
-});
+//   scope.draggable = createDraggable(scope);
 
-// START DRAGGABLE :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-function startDraggable(event) {
+//   element.on("mousedown touchstart", scope, startDraggable);
+// });
 
-  var tile = event.data;
+// // START DRAGGABLE :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+// function startDraggable(event) {
 
-  TweenLite.set(tile.element, { autoAlpha: 0 });
-  TweenLite.set(tile.clone, { x: tile.x, y: tile.y, autoAlpha: 0.1 });
+//   var tile = event.data;
 
-  tile.draggable.startDrag(event.originalEvent);
-}
+//   TweenLite.set(tile.element, { autoAlpha: 0 });
+//   TweenLite.set(tile.clone, { x: tile.x, y: tile.y, autoAlpha: 0.1 });
 
-// CREATE DRAGGABLE ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-function createDraggable(tile) {
+//   tile.draggable.startDrag(event.originalEvent);
+// }
 
-  var clone   = tile.clone;
-  var wrapper = tile.wrapper;
+// // CREATE DRAGGABLE ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+// function createDraggable(tile) {
 
-  tile.draggable = new Draggable(clone, {
-    onPress   : setActive,
-    onDrag    : collapseSpace,
-    onRelease : dropTile
-  });
+//   var clone   = tile.clone;
+//   var wrapper = tile.wrapper;
 
-  return tile.draggable;
-  ///////
+//   tile.draggable = new Draggable(clone, {
+//     onPress   : setActive,
+//     onDrag    : collapseSpace,
+//     onRelease : dropTile
+//   });
 
-  function setActive() {
-    TweenLite.to(clone, 0.15, { scale: 1.2, autoAlpha: 0.3 });
-  }
+//   return tile.draggable;
+//   ///////
 
-  function collapseSpace() {
-    if (!tile.moved) {
-      if (!this.hitTest(wrapper)) {
-        tile.moved = true;
-        TweenLite.to(wrapper, 0.3, { width: 0 });
-      }
-    }
-  }
+//   function setActive() {
+//     TweenLite.to(clone, 0.15, { scale: 1.2, autoAlpha: 0.3 });
+//   }
 
-  function dropTile() {
+//   function collapseSpace() {
+//     if (!tile.moved) {
+//       if (!this.hitTest(wrapper)) {
+//         tile.moved = true;
+//         TweenLite.to(wrapper, 0.3, { width: 0 });
+//       }
+//     }
+//   }
 
-    var className = undefined;
+//   function dropTile() {
 
-    if (this.hitTest(dropPanel, threshold) && !tile.dropped) {
+//     var className = undefined;
+
+//     if (this.hitTest(dropPanel, threshold) && !tile.dropped) {
       
-      dropPanel.append(wrapper);
-      tile.dropped = true;
-      className = "+=dropped";
-    } 
-    console.log(tile);
+//       dropPanel.append(wrapper);
+//       tile.dropped = true;
+//       className = "+=dropped";
+//     } 
+//     console.log(tile);
     
-    moveBack(tile, className);
-  }
-}
+//     moveBack(tile, className);
+//   }
+// }
 
-// MOVE BACK :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-function moveBack(tile, className) {
+// // MOVE BACK :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+// function moveBack(tile, className) {
 
-  var clone   = tile.clone;
-  var element = tile.element;
-  var wrapper = tile.wrapper;
+//   var clone   = tile.clone;
+//   var element = tile.element;
+//   var wrapper = tile.wrapper;
 
-  TweenLite.to(wrapper, 0.2, { width: tile.width });
-  TweenLite.to(clone, 0.3, { scale: 1, autoAlpha: 1, x: tile.x, y: tile.y, onComplete: done });
+//   TweenLite.to(wrapper, 0.2, { width: tile.width });
+//   TweenLite.to(clone, 0.3, { scale: 1, autoAlpha: 1, x: tile.x, y: tile.y, onComplete: done });
 
-  if (className) TweenLite.to([element, clone], 0.3, { className: className });
+//   if (className) TweenLite.to([element, clone], 0.3, { className: className });
 
-  function done() {
-    tile.moved = false;
-    TweenLite.set(clone, { autoAlpha: 0 });
-    TweenLite.set(element, { autoAlpha: 1 });
-  }
-}
+//   function done() {
+//     tile.moved = false;
+//     TweenLite.set(clone, { autoAlpha: 0 });
+//     TweenLite.set(element, { autoAlpha: 1 });
+//   }
+// }
 
-// GET POSITION ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-function getPosition(wrapper, offset) {
+// // GET POSITION ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+// function getPosition(wrapper, offset) {
 
-  var position1 = wrapper.offset();
-  var position2 = container.offset();
+//   var position1 = wrapper.offset();
+//   var position2 = container.offset();
 
-  return {
-    x: position1.left - position2.left + offset.left,
-    y: position1.top  - position2.top  + offset.top
-  };
-}
+//   return {
+//     x: position1.left - position2.left + offset.left,
+//     y: position1.top  - position2.top  + offset.top
+//   };
+// }
