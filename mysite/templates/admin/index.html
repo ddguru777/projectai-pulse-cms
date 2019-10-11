@@ -1,18 +1,117 @@
 {% extends "admin/base_site.html" %}
 {% load i18n static %}
 
-{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />{% endblock %}
+{% block extrastyle %}{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />
+<link rel="stylesheet" type='text/css' href='https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css' />
+{% endblock %}
 
-{% block coltype %}colMS{% endblock %}
+{% block coltype %}flex{% endblock %}
 
 {% block bodyclass %}{{ block.super }} dashboard{% endblock %}
 
 {% block breadcrumbs %}{% endblock %}
 
 {% block content %}
-<div id="content-main">
-
-{% if app_list %}
+<div class="custom-navbar">
+    <nav>
+		<ul class="mcd-menu">
+			<li>
+				<a href="" class="active">
+					<i class="fa fa-home"></i>
+					<strong>Home</strong>
+					<small>Dashboard</small>
+				</a>
+			</li>
+			<li>
+				<a href="">
+					<i class="fa fa-comments-o"></i>
+					<strong>All Pages</strong>
+					<small></small>
+				</a>
+				<ul>
+					<li><a href="#"><i class="fa fa-globe"></i>Add New</a></li>
+					<li><a href="#"><i class="fa fa-trophy"></i>Set Order</a></li>
+				</ul>
+            </li>
+            <li>
+				<a href="">
+					<i class="fa fa-comments-o"></i>
+					<strong>Users</strong>
+					<small></small>
+				</a>
+				<ul>
+					<li><a href="#"><i class="fa fa-globe"></i>Groups</a></li>
+					<li><a href="#"><i class="fa fa-trophy"></i>Users</a></li>
+				</ul>
+            </li>
+            <li>
+				<a href="">
+					<i class="fa fa-comments-o"></i>
+					<strong>Questions</strong>
+					<small></small>
+				</a>
+				<ul>
+					<li>
+						<a href="#"><i class="fa fa-group"></i>About Me</a>
+						<ul>
+							<li><a href="#"><i class="fa fa-female"></i>StakeHolder Groups</a></li>
+                            <li><a href="#"><i class="fa fa-female"></i>Questions</a></li>
+                            <li><a href="#"><i class="fa fa-female"></i>Responses</a></li>
+						</ul>
+					</li>
+					<li>
+                        <a href="#"><i class="fa fa-trophy"></i>About Others</a>
+                        <ul>
+                            <li><a href="#"><i class="fa fa-female"></i>StakeHolder Groups</a></li>
+                            <li><a href="#"><i class="fa fa-female"></i>Questions</a></li>
+                            <li><a href="#"><i class="fa fa-female"></i>Responses</a></li>
+                        </ul>
+                    </li>
+				</ul>
+            </li>
+            <!-- <li>
+				<a href="">
+					<i class="fa fa-comments-o"></i>
+					<strong>Settings</strong>
+					<small></small>
+				</a>
+				<ul>
+					<li><a href="#"><i class="fa fa-globe"></i>Mission</a></li>
+					<li>
+						<a href="#"><i class="fa fa-group"></i>Our Team</a>
+						<ul>
+							<li><a href="#"><i class="fa fa-female"></i>Leyla Sparks</a></li>
+							<li>
+								<a href="#"><i class="fa fa-male"></i>Gleb Ismailov</a>
+								<ul>
+									<li><a href="#"><i class="fa fa-leaf"></i>About</a></li>
+									<li><a href="#"><i class="fa fa-tasks"></i>Skills</a></li>
+								</ul>
+							</li>
+							<li><a href="#"><i class="fa fa-female"></i>Viktoria Gibbers</a></li>
+						</ul>
+					</li>
+					<li><a href="#"><i class="fa fa-trophy"></i>Rewards</a></li>
+					<li><a href="#"><i class="fa fa-certificate"></i>Certificates</a></li>
+				</ul>
+            </li> -->
+            <li>
+                <a href="">
+                    <i class="fa fa-home"></i>
+                    <strong>StakeHolders</strong>
+                    <small></small>
+                </a>
+                <ul>
+                    <li><a href="#"><i class="fa fa-globe"></i>Categories</a></li>
+                    <li><a href="#"><i class="fa fa-trophy"></i>Groups</a></li>
+                    <li><a href="#"><i class="fa fa-trophy"></i>Group Users</a></li>
+                    <li><a href="#"><i class="fa fa-trophy"></i>Mappings</a></li>
+                </ul>
+            </li>
+		</ul>
+	</nav>
+<!-- {% if app_list %}
     {% for app in app_list %}
         {% if app.app_label != "page_nav" %}
             {% if app.app_label != "cms" %}
@@ -83,38 +182,8 @@
     {% endfor %}
 {% else %}
     <p>{% trans "You don't have permission to edit anything." %}</p>
-{% endif %}
+{% endif %} -->
 </div>
 {% endblock %}
 
-{% block sidebar %}
-<div id="content-related">
-    <div class="module" id="recent-actions-module">
-        <h2>{% trans 'Recent actions' %}</h2>
-        <h3>{% trans 'My actions' %}</h3>
-            {% load log %}
-            {% get_admin_log 10 as admin_log for_user user %}
-            {% if not admin_log %}
-            <p>{% trans 'None available' %}</p>
-            {% else %}
-            <ul class="actionlist">
-            {% for entry in admin_log %}
-            <li class="{% if entry.is_addition %}addlink{% endif %}{% if entry.is_change %}changelink{% endif %}{% if entry.is_deletion %}deletelink{% endif %}">
-                {% if entry.is_deletion or not entry.get_admin_url %}
-                    {{ entry.object_repr }}
-                {% else %}
-                    <a href="{{ entry.get_admin_url }}">{{ entry.object_repr }}</a>
-                {% endif %}
-                <br/>
-                {% if entry.content_type %}
-                    <span class="mini quiet">{% filter capfirst %}{{ entry.content_type }}{% endfilter %}</span>
-                {% else %}
-                    <span class="mini quiet">{% trans 'Unknown content' %}</span>
-                {% endif %}
-            </li>
-            {% endfor %}
-            </ul>
-            {% endif %}
-    </div>
-</div>
-{% endblock %}
+

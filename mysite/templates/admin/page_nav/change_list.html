@@ -2,21 +2,27 @@
 {% load i18n admin_urls static admin_list %}
 
 {% block extrastyle %}
-  {{ block.super }}
-  <link rel="stylesheet" type="text/css" href="{% static "admin/css/changelists.css" %}" />
-  <link rel="stylesheet" type="text/css" href="{% static "admin/css/page_nav.css" %}" />
-  {% if cl.formset %}
-    <link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}" />
-  {% endif %}
-  {% if cl.formset or action_form %}
-    <script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script>
-  {% endif %}
-  {{ media.css }}
-  {% if not actions_on_top and not actions_on_bottom %}
-    <style>
-      #changelist table thead th:first-child {width: inherit}
-    </style>
-  {% endif %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static "admin/css/changelists.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "admin/css/page_nav.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />
+<link rel="stylesheet" type='text/css'
+  href='https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css' />
+
+{% if cl.formset %}
+<link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}" />
+{% endif %}
+{% if cl.formset or action_form %}
+<script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script>
+{% endif %}
+{{ media.css }}
+{% if not actions_on_top and not actions_on_bottom %}
+<style>
+  #changelist table thead th:first-child {
+    width: inherit
+  }
+</style>
+{% endif %}
 {% endblock %}
 
 {% block extrahead %}
@@ -29,9 +35,9 @@
 {% if not is_popup %}
 {% block breadcrumbs %}
 <div class="breadcrumbs">
-<a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
-&rsaquo; <a href="{% url 'admin:app_list' app_label=cl.opts.app_label %}">{{ cl.opts.app_config.verbose_name }}</a>
-&rsaquo; {{ cl.opts.verbose_name_plural|capfirst }}
+  <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+  &rsaquo; <a href="{% url 'admin:app_list' app_label=cl.opts.app_label %}">{{ cl.opts.app_config.verbose_name }}</a>
+  &rsaquo; {{ cl.opts.verbose_name_plural|capfirst }}
 </div>
 {% endblock %}
 {% endif %}
@@ -39,8 +45,109 @@
 {% block coltype %}flex{% endblock %}
 
 {% block content %}
+<div>
+  <div class="custom-navbar">
+    <nav>
+      <ul class="mcd-menu">
+        <li>
+          <a href="" class="active">
+            <i class="fa fa-home"></i>
+            <strong>Home</strong>
+            <small>Dashboard</small>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <i class="fa fa-comments-o"></i>
+            <strong>All Pages</strong>
+            <small></small>
+          </a>
+          <ul>
+            <li><a href="#"><i class="fa fa-globe"></i>Add New</a></li>
+            <li><a href="#"><i class="fa fa-trophy"></i>Set Order</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="">
+            <i class="fa fa-comments-o"></i>
+            <strong>Users</strong>
+            <small></small>
+          </a>
+          <ul>
+            <li><a href="#"><i class="fa fa-globe"></i>Groups</a></li>
+            <li><a href="#"><i class="fa fa-trophy"></i>Users</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="">
+            <i class="fa fa-comments-o"></i>
+            <strong>Questions</strong>
+            <small></small>
+          </a>
+          <ul>
+            <li>
+              <a href="#"><i class="fa fa-group"></i>About Me</a>
+              <ul>
+                <li><a href="#"><i class="fa fa-female"></i>StakeHolder Groups</a></li>
+                <li><a href="#"><i class="fa fa-female"></i>Questions</a></li>
+                <li><a href="#"><i class="fa fa-female"></i>Responses</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-trophy"></i>About Others</a>
+              <ul>
+                <li><a href="#"><i class="fa fa-female"></i>StakeHolder Groups</a></li>
+                <li><a href="#"><i class="fa fa-female"></i>Questions</a></li>
+                <li><a href="#"><i class="fa fa-female"></i>Responses</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <!-- <li>
+          <a href="">
+            <i class="fa fa-comments-o"></i>
+            <strong>Settings</strong>
+            <small></small>
+          </a>
+          <ul>
+            <li><a href="#"><i class="fa fa-globe"></i>Mission</a></li>
+            <li>
+              <a href="#"><i class="fa fa-group"></i>Our Team</a>
+              <ul>
+                <li><a href="#"><i class="fa fa-female"></i>Leyla Sparks</a></li>
+                <li>
+                  <a href="#"><i class="fa fa-male"></i>Gleb Ismailov</a>
+                  <ul>
+                    <li><a href="#"><i class="fa fa-leaf"></i>About</a></li>
+                    <li><a href="#"><i class="fa fa-tasks"></i>Skills</a></li>
+                  </ul>
+                </li>
+                <li><a href="#"><i class="fa fa-female"></i>Viktoria Gibbers</a></li>
+              </ul>
+            </li>
+            <li><a href="#"><i class="fa fa-trophy"></i>Rewards</a></li>
+            <li><a href="#"><i class="fa fa-certificate"></i>Certificates</a></li>
+          </ul>
+              </li> -->
+        <li>
+          <a href="">
+            <i class="fa fa-home"></i>
+            <strong>StakeHolders</strong>
+            <small></small>
+          </a>
+          <ul>
+            <li><a href="#"><i class="fa fa-globe"></i>Categories</a></li>
+            <li><a href="#"><i class="fa fa-trophy"></i>Groups</a></li>
+            <li><a href="#"><i class="fa fa-trophy"></i>Group Users</a></li>
+            <li><a href="#"><i class="fa fa-trophy"></i>Mappings</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
   <div id="content-main">
-    <section id="drop-panel">
+    <div class="content-right">
+      <section id="drop-panel">
         <header>Page Order (Drag page items here)</header>
         <div id="drop-area" style="min-height: 100px;"></div>
       </section>
@@ -49,7 +156,7 @@
         <div id="clone-container">
           <div id="scroll-box">
             <div id="tile-container">
-  
+
               <div class="tile-wrapper">
                 <div class="tile">Page A</div>
               </div>
@@ -99,13 +206,14 @@
           </div>
         </div>
         <div style="margin-top:10px;">
-            <button class="btn btn-primary btn-sm">Save</button>
+          <button class="btn btn-primary btn-sm">Save</button>
         </div>
       </section>
+    </div>
   </div>
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/utils/Draggable.min.js"></script> -->
   <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/45226/dragula.min.js"></script>
-  <script type="text/javascript" src="{% static "admin/js/page_nav.js" %}" ></script>
-{% endblock %}
+  <script type="text/javascript" src="{% static "admin/js/page_nav.js" %}"></script>
+  {% endblock %}

@@ -1,115 +1,141 @@
 body {
-    background-color: #eee;
-    margin: 0;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  * {
-    box-sizing: border-box;
-  }
-  
-  main {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    flex-direction: column;
-    user-select: none;
-  }
-  
-  #top-bar {
-    margin: 10px;
-    padding: 10px;
-    background-color: white;
-    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.3);
-    min-height: 100px;
-  }
-  
-  #drop-panel {
-    background: white;
-    padding: 10px;
-    margin: 10px;
-    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.3);
-    min-height: 200px;
-  }
-  
-  #drop-panel header {
-      padding-left: 10px;
-      font-size: 12px;
-  }
-  
-  .content {
-    flex: 1;
-  }
-  
-  #scroll-box {
-    border: 1px solid #ccc;
-    white-space: nowrap;
-    overflow-x: scroll;
-  }
-  
-  #tile-container {
-    display: inline-flex;
-  }
-  
-  .tile-wrapper {
-    width: 160px;
-    height: 160px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-  }
-  
-  .tile {
-    background-color: rgba(69, 69, 69, 0.4);
-    color: #fafafa;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    position: relative;
-    width: 140px;
-    height: 140px;
-    cursor: move;
-    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.5);
-    overflow: hidden;
-  }
-  
-  .tile.clone {
-    position: absolute;
-    opacity: 0;
-    visibility: hidden;
-  }
-  
-  .tile.dropped {
-    background: cornflowerblue;
-  }
+  background-color: #eee;
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+}
 
-  /* Dragula CSS  */
+/* * {
+  box-sizing: border-box;
+} */
 
-  .gu-mirror {
-    position: fixed !important;
-    margin: 0 !important;
-    z-index: 9999 !important;
-    opacity: 0.8;
-    list-style-type: none;
-  }
+.content-right {
+  margin-left: 270px;
+  width: 100% - 270px;
+}
 
-  .gu-hide {
-    display: none !important;
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+  .content-right {
+    margin-left: 220px;
+    width: 100% - 220px;
   }
+}
 
-  .gu-unselectable {
-    -webkit-user-select: none !important;
-    -moz-user-select: none !important;
-    -ms-user-select: none !important;
-    user-select: none !important;
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+  .content-right {
+    margin-left: 0px;
+    width: 100%;
   }
+}
 
-  .gu-transit {
-    opacity: 0.2;
+@media only screen and (max-width: 479px) {
+  .content-right {
+    margin-left: 0px;
+    width: 100%;
   }
+}
+
+main {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+}
+
+#top-bar {
+  margin: 10px;
+  padding: 10px;
+  background-color: white;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.3);
+  min-height: 100px;
+}
+
+#drop-panel {
+  background: white;
+  padding: 10px;
+  margin: 10px;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.3);
+  min-height: 200px;
+}
+
+#drop-panel header {
+  padding-left: 10px;
+  font-size: 12px;
+}
+
+.content {
+  flex: 1;
+}
+
+#scroll-box {
+  border: 1px solid #ccc;
+  white-space: nowrap;
+  overflow-x: scroll;
+}
+
+#tile-container {
+  display: inline-flex;
+}
+
+.tile-wrapper {
+  width: 160px;
+  height: 160px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.tile {
+  background-color: rgba(69, 69, 69, 0.4);
+  color: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  position: relative;
+  width: 140px;
+  height: 140px;
+  cursor: move;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.tile.clone {
+  position: absolute;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.tile.dropped {
+  background: cornflowerblue;
+}
+
+/* Dragula CSS  */
+
+.gu-mirror {
+  position: fixed !important;
+  margin: 0 !important;
+  z-index: 9999 !important;
+  opacity: 0.8;
+  list-style-type: none;
+}
+
+.gu-hide {
+  display: none !important;
+}
+
+.gu-unselectable {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+
+.gu-transit {
+  opacity: 0.2;
+}
