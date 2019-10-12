@@ -114,7 +114,8 @@ MIDDLEWARE = [
 ]
 
 INSTALLED_APPS = [
-    'djangocms_admin_style',
+    'jet.dashboard',
+    'jet',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -216,3 +217,70 @@ THUMBNAIL_PROCESSORS = (
     'filer.thumbnail_processors.scale_and_crop_with_subject_location',
     'easy_thumbnails.processors.filters'
 )
+
+# default, green, light-violet, light-green, light-blue, light-gray
+JET_DEFAULT_THEME = 'default'
+
+JET_THEMES = [
+    {
+        'theme': 'default', # theme folder name
+        'color': '#47bac1', # color of the theme's button in user menu
+        'title': 'Default' # theme title
+    },
+    {
+        'theme': 'green',
+        'color': '#44b78b',
+        'title': 'Green'
+    },
+    {
+        'theme': 'light-green',
+        'color': '#2faa60',
+        'title': 'Light Green'
+    },
+    {
+        'theme': 'light-violet',
+        'color': '#a464c4',
+        'title': 'Light Violet'
+    },
+    {
+        'theme': 'light-blue',
+        'color': '#5EADDE',
+        'title': 'Light Blue'
+    },
+    {
+        'theme': 'light-gray',
+        'color': '#222',
+        'title': 'Light Gray'
+    }
+]
+
+JET_SIDE_MENU_COMPACT = False
+
+JET_SIDE_MENU_ITEMS = [ # A list of application or custom item dicts
+    {'label': 'All Pages', 'items': [
+        {'name': 'cms.page', 'label': 'Pages'},
+        {'name': 'page_nav.pagenav', 'label': 'Set Order'},
+    ]},
+    {'label': 'Users', 'items': [
+        {'name': 'auth.group'},
+        {'name': 'auth.user'},
+    ]},
+    {'label': 'About Me Questions', 'items': [
+        {'name': 'aboutme.amquestionshgroup', 'label': 'StakeHolder Groups'},
+        {'name': 'aboutme.amresponsetopic', 'label': 'Topics'},
+        {'name': 'aboutme.amquestion', 'label': 'Questions'},
+        {'name': 'aboutme.amresponse', 'label': 'Responses'},
+    ]},
+    {'label': 'About Other Questions', 'items': [
+        {'name': 'aboutothers.aoquestionshgroup', 'label': 'StakeHolder Groups'},
+        {'name': 'aboutothers.aoresponsetopic', 'label': 'Topics'},
+        {'name': 'aboutothers.aoquestion', 'label': 'Questions'},
+        {'name': 'aboutothers.aoresponse', 'label': 'Responses'},
+    ]},
+    {'label': 'StakeHolders', 'items': [
+        {'name':'shgroup.shcategory', 'label': 'Categories'},
+        {'name':'shgroup.shgroup', 'label': 'Groups'},
+        {'name':'shgroup.shgroupuser', 'label': 'Group Users'},
+        {'name':'shgroup.shmapping', 'label': 'Mappings'},
+    ]},
+]

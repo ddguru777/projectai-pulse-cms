@@ -1,0 +1,189 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block extrastyle %}{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />
+<link rel="stylesheet" type='text/css' href='https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css' />
+{% endblock %}
+
+{% block coltype %}flex{% endblock %}
+
+{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+<div class="custom-navbar">
+    <nav>
+		<ul class="mcd-menu">
+			<li>
+				<a href="" class="active">
+					<i class="fa fa-home"></i>
+					<strong>Home</strong>
+					<small>Dashboard</small>
+				</a>
+			</li>
+			<li>
+				<a href="">
+					<i class="fa fa-comments-o"></i>
+					<strong>All Pages</strong>
+					<small></small>
+				</a>
+				<ul>
+					<li><a href="#"><i class="fa fa-globe"></i>Add New</a></li>
+					<li><a href="#"><i class="fa fa-trophy"></i>Set Order</a></li>
+				</ul>
+            </li>
+            <li>
+				<a href="">
+					<i class="fa fa-comments-o"></i>
+					<strong>Users</strong>
+					<small></small>
+				</a>
+				<ul>
+					<li><a href="#"><i class="fa fa-globe"></i>Groups</a></li>
+					<li><a href="#"><i class="fa fa-trophy"></i>Users</a></li>
+				</ul>
+            </li>
+            <li>
+				<a href="">
+					<i class="fa fa-comments-o"></i>
+					<strong>Questions</strong>
+					<small></small>
+				</a>
+				<ul>
+					<li>
+						<a href="#"><i class="fa fa-group"></i>About Me</a>
+						<ul>
+							<li><a href="#"><i class="fa fa-female"></i>StakeHolder Groups</a></li>
+                            <li><a href="#"><i class="fa fa-female"></i>Questions</a></li>
+                            <li><a href="#"><i class="fa fa-female"></i>Responses</a></li>
+						</ul>
+					</li>
+					<li>
+                        <a href="#"><i class="fa fa-trophy"></i>About Others</a>
+                        <ul>
+                            <li><a href="#"><i class="fa fa-female"></i>StakeHolder Groups</a></li>
+                            <li><a href="#"><i class="fa fa-female"></i>Questions</a></li>
+                            <li><a href="#"><i class="fa fa-female"></i>Responses</a></li>
+                        </ul>
+                    </li>
+				</ul>
+            </li>
+            <!-- <li>
+				<a href="">
+					<i class="fa fa-comments-o"></i>
+					<strong>Settings</strong>
+					<small></small>
+				</a>
+				<ul>
+					<li><a href="#"><i class="fa fa-globe"></i>Mission</a></li>
+					<li>
+						<a href="#"><i class="fa fa-group"></i>Our Team</a>
+						<ul>
+							<li><a href="#"><i class="fa fa-female"></i>Leyla Sparks</a></li>
+							<li>
+								<a href="#"><i class="fa fa-male"></i>Gleb Ismailov</a>
+								<ul>
+									<li><a href="#"><i class="fa fa-leaf"></i>About</a></li>
+									<li><a href="#"><i class="fa fa-tasks"></i>Skills</a></li>
+								</ul>
+							</li>
+							<li><a href="#"><i class="fa fa-female"></i>Viktoria Gibbers</a></li>
+						</ul>
+					</li>
+					<li><a href="#"><i class="fa fa-trophy"></i>Rewards</a></li>
+					<li><a href="#"><i class="fa fa-certificate"></i>Certificates</a></li>
+				</ul>
+            </li> -->
+            <li>
+                <a href="">
+                    <i class="fa fa-home"></i>
+                    <strong>StakeHolders</strong>
+                    <small></small>
+                </a>
+                <ul>
+                    <li><a href="#"><i class="fa fa-globe"></i>Categories</a></li>
+                    <li><a href="#"><i class="fa fa-trophy"></i>Groups</a></li>
+                    <li><a href="#"><i class="fa fa-trophy"></i>Group Users</a></li>
+                    <li><a href="#"><i class="fa fa-trophy"></i>Mappings</a></li>
+                </ul>
+            </li>
+		</ul>
+	</nav>
+<!-- {% if app_list %}
+    {% for app in app_list %}
+        {% if app.app_label != "page_nav" %}
+            {% if app.app_label != "cms" %}
+                <div class="app-{{ app.app_label }} module">
+                <table>
+                <caption>
+                    <a href="{{ app.app_url }}" class="section" title="{% blocktrans with name=app.name %}Models in the {{ name }} application{% endblocktrans %}">{{ app.name }}</a>
+                </caption>
+                {% for model in app.models %}
+                    <tr class="model-{{ model.object_name|lower }}">
+                    {% if model.admin_url %}
+                        <th scope="row"><a href="{{ model.admin_url }}">{{ model.name }}</a></th>
+                    {% else %}
+                        <th scope="row">{{ model.name }}</th>
+                    {% endif %}
+
+                    {% if model.add_url %}
+                        <td><a href="{{ model.add_url }}" class="addlink">{% trans 'Add' %}</a></td>
+                    {% else %}
+                        <td>&nbsp;</td>
+                    {% endif %}
+
+                    {% if model.admin_url %}
+                        <td><a href="{{ model.admin_url }}" class="changelink">{% trans 'Change' %}</a></td>
+                    {% else %}
+                        <td>&nbsp;</td>
+                    {% endif %}
+                    </tr>
+                {% endfor %}
+                </table>
+                </div>
+            {% else %}
+                <div class="app-{{ app.app_label }} module">
+                <table>
+                <caption>
+                    <a href="{{ app.app_url }}" class="section" title="{% blocktrans with name=app.name %}Models in the {{ name }} application{% endblocktrans %}">{{ app.name }}</a>
+                </caption>
+                {% for model in app.models %}
+                    <tr class="model-{{ model.object_name|lower }}">
+                    {% if model.admin_url %}
+                        <th scope="row"><a href="{{ model.admin_url }}">{{ model.name }}</a></th>
+                    {% else %}
+                        <th scope="row">{{ model.name }}</th>
+                    {% endif %}
+
+                    {% if model.add_url %}
+                        <td><a href="{{ model.add_url }}" class="addlink">{% trans 'Add' %}</a></td>
+                    {% else %}
+                        <td>&nbsp;</td>
+                    {% endif %}
+
+                    {% if model.admin_url %}
+                        <td><a href="{{ model.admin_url }}" class="changelink">{% trans 'Change' %}</a></td>
+                    {% else %}
+                        <td>&nbsp;</td>
+                    {% endif %}
+                    </tr>
+                {% endfor %}
+                    <tr class="model-navigation">
+                        <th scope="row"><a href="/en/admin/page_nav/pagenav">Page Navigation</a></th>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+                </div>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+{% else %}
+    <p>{% trans "You don't have permission to edit anything." %}</p>
+{% endif %} -->
+</div>
+{% endblock %}
+
+

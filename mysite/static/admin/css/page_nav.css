@@ -2,37 +2,7 @@ body {
   background-color: #eee;
   margin: 0;
   position: relative;
-  overflow: hidden;
-}
-
-/* * {
-  box-sizing: border-box;
-} */
-
-.content-right {
-  margin-left: 270px;
-  width: 100% - 270px;
-}
-
-@media only screen and (min-width: 768px) and (max-width: 959px) {
-  .content-right {
-    margin-left: 220px;
-    width: 100% - 220px;
-  }
-}
-
-@media only screen and (min-width: 480px) and (max-width: 767px) {
-  .content-right {
-    margin-left: 0px;
-    width: 100%;
-  }
-}
-
-@media only screen and (max-width: 479px) {
-  .content-right {
-    margin-left: 0px;
-    width: 100%;
-  }
+  /* overflow: hidden; */
 }
 
 main {
@@ -51,15 +21,18 @@ main {
   padding: 10px;
   background-color: white;
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.3);
-  min-height: 100px;
+  min-height: 200px;
+  border-radius: 0.28571rem;
 }
 
 #drop-panel {
   background: white;
   padding: 10px;
   margin: 10px;
+  margin-top: 20px;
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.3);
   min-height: 200px;
+  border-radius: 0.28571rem;
 }
 
 #drop-panel header {
@@ -72,13 +45,17 @@ main {
 }
 
 #scroll-box {
-  border: 1px solid #ccc;
+  border: 0px solid #ccc;
   white-space: nowrap;
   overflow-x: scroll;
+  min-height: 160px;
+  border-radius: 0.28571rem;
 }
 
 #tile-container {
   display: inline-flex;
+  min-height: 160px;
+  min-width: 160px;
 }
 
 .tile-wrapper {

@@ -1,5 +1,7 @@
 from django.db import models
+from cms.models import Page
 
 # Create your models here.
 class PageNav(models.Model):
-    order = models.PositiveIntegerField()
+    page = models.OneToOneField(Page, on_delete=models.CASCADE, primary_key=True)
+    order = models.PositiveIntegerField(unique=True)

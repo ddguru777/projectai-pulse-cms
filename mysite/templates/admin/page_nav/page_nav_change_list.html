@@ -1,0 +1,85 @@
+{% extends 'admin/base.html' %}
+{% load i18n admin_urls static admin_list %}
+
+{% block extrastyle %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static "admin/css/page_nav.css" %}" />
+    {% if cl.formset or action_form %}
+    <script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script>
+    {% endif %}
+    {{ media.css }}
+    {% if not actions_on_top and not actions_on_bottom %}
+        <style>
+        #changelist table thead th:first-child {width: inherit}
+        </style>
+    {% endif %}
+{% endblock %}
+
+{% block extrahead %}
+{{ block.super }}
+{{ media.js }}
+{% endblock %}
+
+{% block bodyclass %}{{ block.super }} app-{{ opts.app_label }} model-{{ opts.model_name }} change-list{% endblock %}
+
+{% if not is_popup %}
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+<a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+&rsaquo; <a href="{% url 'admin:app_list' app_label=cl.opts.app_label %}">{{ cl.opts.app_config.verbose_name }}</a>
+&rsaquo; {{ cl.opts.verbose_name_plural|capfirst }}
+</div>
+{% endblock %}
+{% endif %}
+
+{% block coltype %}flex{% endblock %}
+
+{% block content %}
+
+<div id="content-main">
+    {% block object-tools %}
+            <ul class="object-tools">
+            {% block object-tools-items %}
+                {% if has_add_permission %}
+                <li>
+                {% url cl.opts|admin_urlname:'add' as add_url %}
+                <a href="" class="changelink default">
+                    {% blocktrans with cl.opts.verbose_name as name %}Save{% endblocktrans %}
+                </a>
+                </li>
+                {% endif %}
+            {% endblock %}
+            </ul>
+            <div class="clear"></div>
+    {% endblock %}
+    <div>
+        <section id="drop-panel">
+            <header>Page Order (Drag page items here)</header>
+            <div id="drop-area" style="min-height: 100px;">
+                {% for obj in published_pages_list %}
+                <div class="tile-wrapper">
+                    <div class="tile">{{obj.title}}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        <section id="top-bar">
+            <header>Page List</header>
+            <div id="clone-container">
+                <div id="scroll-box">
+                    <div id="tile-container">
+                        {% for obj in unpublished_pages_list %}
+                        <div class="tile-wrapper">
+                            <div class="tile">{{obj.title}}</div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/45226/dragula.min.js"></script>
+<script type="text/javascript" src="{% static "admin/js/page_nav.js" %}"></script>
+
+{% endblock %}
