@@ -69,7 +69,9 @@ main {
 
 .tile {
   background-color: rgba(69, 69, 69, 0.4);
-  color: #fafafa;
+  background-image: url("../img/background.jpeg");
+  background-size: cover;
+  color: #42586b;
   display: flex;
   align-items: center;
   justify-content: center;

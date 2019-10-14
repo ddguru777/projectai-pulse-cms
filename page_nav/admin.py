@@ -1,11 +1,11 @@
-from django.contrib import admin
+from django.contrib import admin, messages
 from .models import PageNav
 from cms.models import Title, Page
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 import json
 
-admin.site.site_header = 'ProjectAI Dashboard'
-
+# admin.site.site_header = 'ProjectAI Dashboard'
+# admin.site.site_title = 'ProjectAI Administration'
 class PageNavAdmin(admin.ModelAdmin):
             
     def changelist_view(self, request, extra_context=None):
@@ -43,10 +43,12 @@ class PageNavAdmin(admin.ModelAdmin):
                 order = PageNav(order=item['order'], page_id=item['id'])
                 order.save()
                 Title.objects.filter(pk=item['id']).update(published=True)
-
-            return HttpResponse('Success')
+                
+            messages.success(request, 'The page order was saved successfully.')
+            return JsonResponse('Success', safe=False)
         else:
-            return HttpResponse('Request method is not a POST')
+            messages.error(request, 'Save request failed.')
+            return JsonResponse('Failed', safe=False)
 
     change_list_template = 'admin/page_nav/page_nav_change_list.html'
 
