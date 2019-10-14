@@ -14,6 +14,7 @@ from page_nav.admin import PageNavAdmin
 admin.autodiscover()
 
 urlpatterns = [
+    url(r'^en/admin/page_nav/pagenav/likepost', PageNavAdmin.likePost),
     url(r'^sitemap\.xml$', sitemap,
         {'sitemaps': {'cmspages': CMSSitemap}}),
     url(r'^jet/', include('jet.urls', 'jet')),
@@ -24,10 +25,6 @@ urlpatterns += i18n_patterns(
     url(r'^admin/', admin.site.urls),  # NOQA
     url(r'^', include('cms.urls'))
 )
-
-urlpatterns += [
-    url(r'^en/admin/page_nav/pagenav/likepost', PageNavAdmin.likePost)
-]
 
 # Change admin site title
 admin.site.site_header = _("ProjectAI Administration")
