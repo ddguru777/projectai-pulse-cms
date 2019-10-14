@@ -18,13 +18,16 @@ urlpatterns = [
         {'sitemaps': {'cmspages': CMSSitemap}}),
     url(r'^jet/', include('jet.urls', 'jet')),
     url(r'^jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
-    url(r'^en/admin/page_nav/pagenav/likepost', PageNavAdmin.likePost)
 ]
 
 urlpatterns += i18n_patterns(
     url(r'^admin/', admin.site.urls),  # NOQA
     url(r'^', include('cms.urls'))
 )
+
+urlpatterns += [
+    url(r'^en/admin/page_nav/pagenav/likepost', PageNavAdmin.likePost)
+]
 
 # Change admin site title
 admin.site.site_header = _("ProjectAI Administration")
