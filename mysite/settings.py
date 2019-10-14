@@ -284,3 +284,5 @@ JET_SIDE_MENU_ITEMS = [ # A list of application or custom item dicts
         {'name':'shgroup.shmapping', 'label': 'Mappings'},
     ]},
 ]
+
+APPEND_SLASH=False

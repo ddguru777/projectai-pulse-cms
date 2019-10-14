@@ -43,7 +43,7 @@
                 {% if has_add_permission %}
                 <li>
                 {% url cl.opts|admin_urlname:'add' as add_url %}
-                <a href="" class="changelink default">
+                <a class="changelink default" id="save_order">
                     {% blocktrans with cl.opts.verbose_name as name %}Save{% endblocktrans %}
                 </a>
                 </li>
@@ -53,16 +53,19 @@
             <div class="clear"></div>
     {% endblock %}
     <div>
-        <section id="drop-panel">
-            <header>Page Order (Drag page items here)</header>
-            <div id="drop-area" style="min-height: 100px;">
-                {% for obj in published_pages_list %}
-                <div class="tile-wrapper">
-                    <div class="tile">{{obj.title}}</div>
+        <form action="." method="post">
+            {% csrf_token %}
+            <section id="drop-panel">
+                <header>Page Order (Drag page items here)</header>
+                <div id="drop-area" style="min-height: 100px;">
+                    {% for obj in published_pages_list %}
+                    <div class="tile-wrapper">
+                        <div class="tile" page-id="{{obj.page_id}}">{{obj.page}}</div>
+                    </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
-            </div>
-        </section>
+            </section>
+        </form>
         <section id="top-bar">
             <header>Page List</header>
             <div id="clone-container">
@@ -70,7 +73,7 @@
                     <div id="tile-container">
                         {% for obj in unpublished_pages_list %}
                         <div class="tile-wrapper">
-                            <div class="tile">{{obj.title}}</div>
+                            <div class="tile" page-id="{{obj.page_id}}">{{obj.title}}</div>
                         </div>
                         {% endfor %}
                     </div>
@@ -79,7 +82,44 @@
         </section>
     </div>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/45226/dragula.min.js"></script>
 <script type="text/javascript" src="{% static "admin/js/page_nav.js" %}"></script>
+<script>
 
+    var ary_orders = [];
+    $("#drop-area .tile").each(function(index) {
+        ary_orders[index] = {id: $(this).attr('page-id'), order: $(this).attr('page-order')};
+    });
+
+    $("body").mouseup(function() {
+        ary_orders = [];
+        $("#drop-area .tile").each(function(index) {
+            ary_orders[index] = {id: $(this).attr('page-id'), order: index+1};
+        });
+    });
+
+    $("#save_order").on('click', function() {
+        console.log(ary_orders);
+
+        $.ajax({
+            url: "likepost",
+            type: "POST",
+            dataType: 'json',
+            data: { 
+                csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value,
+                'data': JSON.stringify(ary_orders) },
+
+            success: function(json) {
+                console.log(json);
+                console.log("success");
+            },
+
+            error: function(xhr, errmsg, err) {
+                console.log(xhr.status+": "+xhr.responseText);
+            }
+        });
+    });
+</script>
 {% endblock %}

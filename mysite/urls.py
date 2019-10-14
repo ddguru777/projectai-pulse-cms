@@ -10,7 +10,7 @@ from django.contrib.sitemaps.views import sitemap
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.static import serve
 from django.utils.translation import ugettext_lazy as _
-
+from page_nav.admin import PageNavAdmin
 admin.autodiscover()
 
 urlpatterns = [
@@ -18,11 +18,12 @@ urlpatterns = [
         {'sitemaps': {'cmspages': CMSSitemap}}),
     url(r'^jet/', include('jet.urls', 'jet')),
     url(r'^jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
+    url(r'^en/admin/page_nav/pagenav/likepost', PageNavAdmin.likePost)
 ]
 
 urlpatterns += i18n_patterns(
     url(r'^admin/', admin.site.urls),  # NOQA
-    url(r'^', include('cms.urls')),
+    url(r'^', include('cms.urls'))
 )
 
 # Change admin site title
