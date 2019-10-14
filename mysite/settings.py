@@ -285,4 +285,4 @@ JET_SIDE_MENU_ITEMS = [ # A list of application or custom item dicts
     ]},
 ]
 
-APPEND_SLASH=False
+APPEND_SLASH=True
