@@ -11,6 +11,14 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.static import serve
 from django.utils.translation import ugettext_lazy as _
 from page_nav.admin import PageNavAdmin
+from rest_framework import routers
+from mysite.quickstart import views
+
+router = routers.DefaultRouter()
+router.register(r'users', views.UserViewSet)
+router.register(r'groups', views.GroupViewSet)
+
+
 admin.autodiscover()
 
 urlpatterns = [
@@ -19,6 +27,8 @@ urlpatterns = [
         {'sitemaps': {'cmspages': CMSSitemap}}),
     url(r'^jet/', include('jet.urls', 'jet')),
     url(r'^jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
+    url('', include(router.urls)),
+    url('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
 
 urlpatterns += i18n_patterns(

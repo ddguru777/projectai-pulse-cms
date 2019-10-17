@@ -114,8 +114,8 @@ MIDDLEWARE = [
 ]
 
 INSTALLED_APPS = [
-    'jet.dashboard',
     'jet',
+    'jet.dashboard',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -149,6 +149,7 @@ INSTALLED_APPS = [
     'aboutme',
     'aboutothers',
     'page_nav',
+    'rest_framework',
 ]
 
 LANGUAGES = (
@@ -286,3 +287,8 @@ JET_SIDE_MENU_ITEMS = [ # A list of application or custom item dicts
 ]
 
 APPEND_SLASH=True
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
