@@ -261,7 +261,8 @@ JET_SIDE_MENU_COMPACT = False
 JET_SIDE_MENU_ITEMS = [ # A list of application or custom item dicts
     {'label': 'All Pages', 'items': [
         {'name': 'cms.page', 'label': 'Pages'},
-        {'name': 'page_nav.pagenav', 'label': 'Set Order'},
+        {'name': 'page_setting.pagesetting', 'label': 'Set Page Contents'},
+        {'name': 'page_nav.pagenav', 'label': 'Set Page Order'},
     ]},
     {'label': 'Users', 'items': [
         {'name': 'auth.group'},
