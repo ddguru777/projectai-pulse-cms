@@ -1,0 +1,27 @@
+from django.db import models
+from cms.models import Page
+from enumfields import EnumField
+from enumfields import Enum
+
+class PageType(Enum):
+    PG_WELCOME1 = 0
+    PG_WELCOME2 = 1
+    PG_ABOUT_ME = 2
+    PG_SURVEY = 3
+    PG_NEW_STAKEHOLDER = 4
+    PG_ABOUT_STAKEHOLDER = 5
+    PG_RESULT = 6
+    
+    # class Labels:
+    #     PG_WELCOME1 = 'Welcome 1'
+    #     PG_WELCOME2 = 'Welcome 2'
+    #     PG_ABOUT_ME = 'About Me'
+    #     PG_SURVEY = 'Survey'
+    #     PG_NEW_STAKEHOLDER = 'New StakeHolder'
+    #     PG_ABOUT_STAKEHOLDER = 'About StakeHolder'
+    #     PG_RESULT = 'Result'
+
+class PageSetting(models.Model):
+    page = models.OneToOneField(Page, on_delete=models.CASCADE, primary_key=True)
+    pageType = EnumField(PageType, max_length=1)
+

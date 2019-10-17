@@ -149,6 +149,7 @@ INSTALLED_APPS = [
     'aboutme',
     'aboutothers',
     'page_nav',
+    'page_setting',
     'rest_framework',
 ]
 
