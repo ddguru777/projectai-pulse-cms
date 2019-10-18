@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User, Group
+from page_setting.models import PageSetting
 from rest_framework import viewsets
-from mysite.quickstart.serializers import UserSerializer, GroupSerializer
+from mysite.quickstart.serializers import UserSerializer, GroupSerializer, PageSettingSerializer
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -15,3 +16,10 @@ class GroupViewSet(viewsets.ModelViewSet):
     """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+
+class PageSettingViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows page contents to be viewed or edited.
+    """
+    queryset = PageSetting.objects.all()
+    serializer_class = PageSettingSerializer
