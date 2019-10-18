@@ -15,3 +15,4 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 class PageSettingSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = PageSetting
+        fields = '__all__'
