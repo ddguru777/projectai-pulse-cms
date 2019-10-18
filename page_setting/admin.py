@@ -28,8 +28,9 @@ class AOQuestionInline(CompactInline):
 class PageSettingAdmin(admin.ModelAdmin):
     #fields = ['page', 'pageType']
     fieldsets = [
-        (None,      {'fields': ['page', 'pageType']}),
+        (None,      {'fields': ('page', 'pageType')}),
     ]
+
     inlines = [AMQuestionInline, AOQuestionInline]
 
     list_display = ('page', 'pageType')
