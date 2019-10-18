@@ -1,0 +1,31 @@
+{% load i18n admin_urls %}
+{% spaceless %}
+<ul class="cms-pagetree-dropdown-menu-inner">
+    {% block actions %}
+        
+        <li>
+            {% if has_delete_permission %}
+                <a href="{% url opts|admin_urlname:'delete' page.id %}?language={{ preview_language }}" title="{% filter escapejs %}{% trans "Delete" %}{% endfilter %}">
+            {% else %}
+                <a href="#" class="cms-pagetree-dropdown-item-disabled">
+            {% endif %}
+                    <span class="cms-icon cms-icon-bin"></span>
+                    <span>{% filter escapejs %}{% trans "Delete" %}...{% endfilter %}</span>
+                </a>
+        </li>
+        
+        <li>
+            {% if has_change_advanced_settings_permission %}
+                <a href="{% url 'admin:page_setting_pagesetting_change' page.id %}" title="{% filter escapejs %}{% trans "Advanced settings" %}{% endfilter %}">
+            {% else %}
+                <a href="#" class="cms-pagetree-dropdown-item-disabled">
+            {% endif %}
+                    <span class="cms-icon cms-icon-cogs"></span>
+                    <span>{% filter escapejs %}{% trans "Advanced settings" %}{% endfilter %}</span>
+                </a>
+        </li>
+        
+    {% endblock actions %}
+
+</ul>
+{% endspaceless %}
