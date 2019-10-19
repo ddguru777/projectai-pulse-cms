@@ -151,6 +151,7 @@ INSTALLED_APPS = [
     'page_nav',
     'page_setting',
     'rest_framework',
+    'snippets.apps.SnippetsConfig',
 ]
 
 LANGUAGES = (

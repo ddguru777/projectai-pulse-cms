@@ -11,13 +11,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.static import serve
 from django.utils.translation import ugettext_lazy as _
 from page_nav.admin import PageNavAdmin
-from rest_framework import routers
-from mysite.quickstart import views
-
-router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
-router.register(r'pagesettings', views.PageSettingViewSet)
+from rest_framework.routers import DefaultRouter
 
 admin.autodiscover()
 
@@ -27,13 +21,12 @@ urlpatterns = [
         {'sitemaps': {'cmspages': CMSSitemap}}),
     url(r'^jet/', include('jet.urls', 'jet')),
     url(r'^jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
-    url('', include(router.urls)),
-    url('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    url('', include('snippets.urls')),
 ]
 
 urlpatterns += i18n_patterns(
     url(r'^admin/', admin.site.urls),  # NOQA
-    url(r'^', include('cms.urls'))
+    #url(r'^', include('cms.urls'))
 )
 
 # Change admin site title
