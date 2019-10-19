@@ -1,11 +1,13 @@
 from django.conf.urls import include, url
-from rest_framework.urlpatterns import format_suffix_patterns
+from rest_framework.routers import DefaultRouter
 from snippets import views
-urlpatterns = [
-    url('snippets/', views.SnippetList.as_view()),
-    url('snippets/<int:pk>', views.SnippetDetail.as_view()),
-    url('users/', views.UserList.as_view()),
-    url('users/<int:pk>/', views.UserDetail.as_view()),
-]
 
-urlpatterns = format_suffix_patterns(urlpatterns)
+# Create a router and register our viewsets with it.
+router = DefaultRouter()
+router.register(r'snippets', views.SnippetViewSet)
+router.register(r'users', views.UserViewSet)
+
+# The API URLs are now determined automatically by the router.
+urlpatterns = [
+    url('', include(router.urls)),
+]
