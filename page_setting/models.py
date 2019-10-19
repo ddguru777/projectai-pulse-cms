@@ -22,9 +22,9 @@ class PageType(Enum):
         PG_RESULT = 'Result'
 
 class PageSetting(models.Model):
-    page = models.OneToOneField(Page, on_delete=models.CASCADE, primary_key=True)
+    page = models.OneToOneField(Page, related_name='pages', on_delete=models.CASCADE, primary_key=True)
     pageType = EnumField(PageType, max_length=1)
 
 class ExtendedPage(models.Model):
-    page = models.ForeignKey(Page, unique=True, verbose_name="Page", editable=False, related_name='extended_fields')
+    page = models.OneToOneField(Page, verbose_name="Page", editable=False, related_name='extended_fields')
     my_extra_field = models.CharField(max_length=50)

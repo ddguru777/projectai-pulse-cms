@@ -19,7 +19,7 @@ class AOQuestion(models.Model):
     questionSequence = models.PositiveIntegerField()
     topicPrompt = models.CharField(max_length=255)
     commentPrompt = models.CharField(max_length=255)
-    PageSetting = models.ForeignKey(PageSetting, on_delete=models.SET_NULL, default=None, blank=True, null=True)
+    PageSetting = models.ForeignKey(PageSetting, on_delete=models.SET_NULL, related_name="aopagesetting", default=None, blank=True, null=True)
     
     def __str__(self):
         return self.questionText
