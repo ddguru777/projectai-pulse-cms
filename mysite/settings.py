@@ -28,7 +28,7 @@ SECRET_KEY = 'oyxb8b(f@r*7bj6+3of@-(8y^lm-o#_e)umxq2)^1#275=!m8*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['3.15.16.117', '127.0.0.1']
+ALLOWED_HOSTS = ['3.15.16.117', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -292,6 +292,10 @@ JET_SIDE_MENU_ITEMS = [ # A list of application or custom item dicts
 APPEND_SLASH=True
 
 REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
